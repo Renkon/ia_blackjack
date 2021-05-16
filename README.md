@@ -25,3 +25,4 @@ https://www.cse.unsw.edu.au/~cs9417ml/MLP2/BackPropagation.html
 https://medium.com/@tiago.tmleite/neural-networks-multilayer-perceptron-and-the-backpropagation-algorithm-a5cd5b904fde
 https://mathworks.com/matlabcentral/fileexchange/54076-mlp-neural-network-with-backpropagation
 https://scikit-learn.org/stable/modules/neural_networks_supervised.html
+https://www.tutorialspoint.com/tensorflow/tensorflow_multi_layer_perceptron_learning.htm
