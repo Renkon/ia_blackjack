@@ -45,5 +45,5 @@ class RedNeuronal:
 
     def entrenar(self, model, epochs):
         print("Comenzando entrenamiento...")
-        history = model.fit(self.__x_e, self.__y_e, epochs=epochs, validation_data=(self.__x_p, self.__y_p), batch_size=4)
+        history = model.fit(self.__x_e, self.__y_e, epochs=epochs, validation_data=(self.__x_p, self.__y_p))
         print("Entrenamiento finalizado...")

@@ -48,7 +48,8 @@ class Aumentador:
 
         for x in range(int(config["imagenes_por_carta"] * 1.2)):
             transformed_image = image_iterator.next()[0].astype('int') / 255
-            self.__data.append([transformed_image.flatten(), label])
+            transformed_image = transformed_image.reshape((config["ancho_imagenes_a_procesar"] * config["alto_imagenes_a_procesar"]))
+            self.__data.append([transformed_image, label])
         
         print("Generadas " + str(config["imagenes_por_carta"]) + " imagenes distintas para label " + str(label))
         
