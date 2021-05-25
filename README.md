@@ -50,3 +50,6 @@ pip3 install matplotlib
 pip3 install numpy
 pip3 install SciPy
 pip3 install opencv-python
+pip3 install pydot
+pip3 install graphviz
+pip3 install pydotplus

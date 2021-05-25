@@ -57,6 +57,6 @@ class Reconocedor:
         # Y finalmente retornamos los 4 arrays en una tupla.
         return x_entrenamiento, y_entrenamiento, x_pruebas, y_pruebas
 
-    def procesar_sets(self, x_e, y_e, x_p, y_p, inputs, outputs, epochs):
+    def procesar_sets(self, x_e, y_e, x_p, y_p, inputs, outputs, epochs, learn_rate):
         red = RedNeuronal(x_e, y_e, x_p, y_p)
-        red.crear_modelo(inputs, outputs, epochs)
+        red.crear_modelo(inputs, outputs, epochs, learn_rate)

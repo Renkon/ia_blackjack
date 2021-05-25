@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
-from model.carta import Carta
-from model.tipocarta import TipoCarta
+from src.model.carta import Carta
+from src.model.tipocarta import TipoCarta
 import pathlib
 
 __path = pathlib.Path(__file__).parent.parent / "imagenes"

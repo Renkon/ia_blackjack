@@ -17,4 +17,5 @@ reconocedor.procesar_sets(
     y_p,
     config["ancho_imagenes_a_procesar"] * config["alto_imagenes_a_procesar"],
     52,
-    config["epochs"])
+    config["epochs"],
+    config["tasa_aprendizaje"])
