@@ -3,7 +3,7 @@
 import tensorflow as tf
 import cv2
 import matplotlib.pyplot as plt
-import random
+from random import shuffle
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from matplotlib.pyplot import imread, imshow, subplots, show
 
@@ -54,3 +54,6 @@ class Aumentador:
         
     def barajar_datos(self):
         shuffle(self.__data)
+    
+    def obtener_datos(self):
+        return self.__data

@@ -7,6 +7,7 @@ from ai.aumentador import Aumentador
 aumentador = Aumentador()
 reconocedor = Reconocedor(aumentador)
 
-reconocedor.iniciar_aumentacion()
+datos = reconocedor.iniciar_aumentacion()
+reconocedor.crear_sets(datos, 50000)
 
 wait = input("End")
