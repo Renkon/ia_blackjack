@@ -8,6 +8,6 @@ aumentador = Aumentador()
 reconocedor = Reconocedor(aumentador)
 
 datos = reconocedor.iniciar_aumentacion()
-reconocedor.crear_sets(datos, 50000)
+datasets = reconocedor.crear_sets(datos, 50000)
 
 wait = input("End")
