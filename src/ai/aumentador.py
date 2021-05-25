@@ -20,18 +20,17 @@ class Aumentador:
         images = image.reshape((1, image.shape[0], image.shape[1], 1))
 
         # Para mostrar la imagen que se va a procesar... 
-        # TODO: remover
         # imshow(images[0])
         # show()
 
         data_generator = ImageDataGenerator(
-            rotation_range = 180,
-            width_shift_range = 0.2,
-            height_shift_range = 0.2,
-            brightness_range = (0.5, 1.5),
-            shear_range = 0.5,
-            zoom_range = 0.8,
-            fill_mode = "nearest",
+            rotation_range=180,
+            width_shift_range=0.2,
+            height_shift_range=0.2,
+            brightness_range=(0.5, 1.5),
+            shear_range=0.5,
+            zoom_range=0.8,
+            fill_mode="nearest",
         )
         
         data_generator.fit(images)
