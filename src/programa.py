@@ -2,9 +2,11 @@
 from model.carta import Carta
 from model.tipocarta import TipoCarta
 from ai.reconocedor import Reconocedor
+from ai.aumentador import Aumentador
 
-carta = Carta(3, TipoCarta.Diamantes)
+aumentador = Aumentador()
+reconocedor = Reconocedor(aumentador)
 
-print(str(carta))
+reconocedor.iniciar_aumentacion()
 
-Reconocedor().iniciar_aumentacion()
+wait = input("End")

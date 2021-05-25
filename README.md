@@ -26,3 +26,17 @@ https://medium.com/@tiago.tmleite/neural-networks-multilayer-perceptron-and-the-
 https://mathworks.com/matlabcentral/fileexchange/54076-mlp-neural-network-with-backpropagation
 https://scikit-learn.org/stable/modules/neural_networks_supervised.html
 https://www.tutorialspoint.com/tensorflow/tensorflow_multi_layer_perceptron_learning.htm
+
+# Segunda vez xD
+https://www.youtube.com/watch?v=Rgpfk6eYxJA&t=66s
+https://towardsdatascience.com/multi-layer-perceptron-using-tensorflow-9f3e218a4809
+https://medium.com/swlh/image-classification-for-playing-cards-26d660f3149e
+https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html
+https://nbviewer.jupyter.org/github/PGP-MachineLearning/IA-RNA/blob/master/RNA%20MLP%20Imag%20Nros%20Chinos.ipynb
+
+# Pasos a seguir posta posta
+pip3 install tensorflow
+pip3 install matplotlib
+pip3 install numpy
+pip3 install SciPy
+pip3 install opencv-python
