@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+from src.model.tipocarta import TipoCarta
+
 
 class Carta:
     def __init__(self, numero, tipo):
@@ -16,3 +18,15 @@ class Carta:
 
     def __ne__(self, other):
         return not(self == other)
+
+    # Metodos estaticos para convertir las cartas en numeros
+    def to_number(carta):
+        return float(carta.numero + (int(carta.tipo) - 1) * 13)
+
+    def to_carta(numero):
+        numero_redondeado = int(numero + 0.5)
+        numero = numero_redondeado % 13
+        if numero == 0:
+            numero = 13
+        tipo = ((numero_redondeado - 1) // 13) + 1
+        return Carta(numero, TipoCarta(tipo))

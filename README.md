@@ -52,4 +52,7 @@ pip3 install SciPy
 pip3 install opencv-python
 pip3 install pydot
 pip3 install graphviz
-pip3 install pydotplus
+pip3 install scikit_learn
+
+https://gitlab.com/graphviz/graphviz/-/package_files/9574245/download
+Agregar graphviz al path

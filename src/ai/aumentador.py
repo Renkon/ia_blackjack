@@ -46,9 +46,9 @@ class Aumentador:
         #     plt.imshow(image_iterator.next()[0].astype('int'))
         # plt.show()
 
-        for x in range(config["imagenes_por_carta"]): 
+        for x in range(int(config["imagenes_por_carta"] * 1.2)):
             transformed_image = image_iterator.next()[0].astype('int') / 255
-            self.__data.append([transformed_image, label])
+            self.__data.append([transformed_image.flatten(), label])
         
         print("Generadas " + str(config["imagenes_por_carta"]) + " imagenes distintas para label " + str(label))
         
@@ -57,6 +57,9 @@ class Aumentador:
     
     def obtener_datos(self):
         return self.__data
+
+    def limpiar_datos(self):
+        self.__data.clear()
 
     def __reformatear_imagen(self, source):
         image = cv2.imread(str(source), cv2.IMREAD_GRAYSCALE)
