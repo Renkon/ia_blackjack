@@ -3,6 +3,7 @@
 import tensorflow as tf
 import cv2
 import matplotlib.pyplot as plt
+from config import config
 from random import shuffle
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from matplotlib.pyplot import imread, imshow, subplots, show
@@ -15,7 +16,7 @@ class Aumentador:
         print("Iniciando procesamiento de " + str(source))
         
         image = cv2.imread(str(source), cv2.IMREAD_GRAYSCALE)
-        image = cv2.resize(image, (32, 64))
+        image = cv2.resize(image, (config["ancho_imagenes"], config["alto_imagenes"]))
         images = image.reshape((1, image.shape[0], image.shape[1], 1))
 
         # Para mostrar la imagen que se va a procesar... 
@@ -46,11 +47,11 @@ class Aumentador:
         #     plt.imshow(image_iterator.next()[0].astype('int'))
         # plt.show()
 
-        for x in range(1000): 
+        for x in range(config["imagenes_por_carta"]): 
             transformed_image = image_iterator.next()[0].astype('int') / 255
             self.__data.append([transformed_image, label])
         
-        print("Generadas mil imagenes distintas para label " + str(label))
+        print("Generadas " + str(config["imagenes_por_carta"]) + " imagenes distintas para label " + str(label))
         
     def barajar_datos(self):
         shuffle(self.__data)

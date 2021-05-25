@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+from config import config
 import numpy as np
 from model.cartas import cartas  
 
@@ -22,6 +23,10 @@ class Reconocedor:
         return self.__aumentador.obtener_datos()
 
     def crear_sets(self, datos, limitador):
+        print("Creando sets de datos")
+        print("Usando en total " + str(len(datos)) + " imagenes")
+        print("Usando " + str(limitador) + " imagenes para entrenamiento")
+        print("Usando " + str(len(datos) - limitador) + " imagenes para pruebas")
         # Cuarta etapa, separarlo en un set de entrenamiento, y otro de test.
         entrenamiento = datos[:limitador]
         pruebas = datos[limitador:]
