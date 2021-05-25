@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+import pathlib
 import numpy as np
 from threading import Thread
 from sklearn.model_selection import train_test_split
@@ -14,10 +14,12 @@ class Reconocedor:
         self.__aumentador = aumentador
 
     def iniciar_aumentacion(self):
+        self.__aumentador.preparar_procesamiento(pathlib.Path(__file__).parent.parent / "imagenes")
+
         # Primera etapa: populamos con el augmentator imagenes para cada carta.
         for carta, path in cartas.items():
             print("Invocando data augmentator para carta " + str(carta))
-            self.__aumentador.procesar_imagen(Carta.to_number(carta), path)
+            self.__aumentador.procesar_imagen(int(Carta.to_number(carta)), path)
 
         # Segunda etapa, shuffleamos
         print("Shuffleando lista de datos")
