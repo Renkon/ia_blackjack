@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 
-from config import config
 import numpy as np
-from model.cartas import cartas  
+from threading import Thread
+from src.model.cartas import cartas
+from src.ai.redneuronal import RedNeuronal
+
 
 class Reconocedor:
     def __init__(self, aumentador):
@@ -13,7 +15,7 @@ class Reconocedor:
         for carta, path in cartas.items():
             print("Invocando data augmentator para carta " + str(carta))
             self.__aumentador.procesar_imagen(carta, path)
-        
+
         # Segunda etapa, shuffleamos
         print("Shuffleando lista de datos")
         self.__aumentador.barajar_datos()
@@ -53,4 +55,8 @@ class Reconocedor:
         y_pruebas = np.array(y_pruebas)
 
         # Y finalmente retornamos los 4 arrays en una tupla.
-        return (x_entrenamiento, y_entrenamiento, x_pruebas, y_pruebas)
+        return x_entrenamiento, y_entrenamiento, x_pruebas, y_pruebas
+
+    def procesar_sets(self, x_e, y_e, x_p, y_p, inputs, outputs, epochs):
+        red = RedNeuronal(x_e, y_e, x_p, y_p)
+        red.crear_modelo(inputs, outputs, epochs)

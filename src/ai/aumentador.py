@@ -1,12 +1,11 @@
 #!/usr/bin/python3
 
-import tensorflow as tf
 import cv2
 import matplotlib.pyplot as plt
-from config import config
+from src.config import config
 from random import shuffle
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
-from matplotlib.pyplot import imread, imshow, subplots, show
+from matplotlib.pyplot import imshow, subplots, show
 
 class Aumentador:
     def __init__(self):
@@ -14,12 +13,13 @@ class Aumentador:
 
     def procesar_imagen(self, label, source):
         print("Iniciando procesamiento de " + str(source))
-        
-        image = cv2.imread(str(source), cv2.IMREAD_GRAYSCALE)
-        image = cv2.resize(image, (config["ancho_imagenes"], config["alto_imagenes"]))
+
+        image = self.__reformatear_imagen(source)
+
+        # Hacemos un proceso de hacer un cuadrado alrededor, para tener espacio extra para aplicar rotaciones"
         images = image.reshape((1, image.shape[0], image.shape[1], 1))
 
-        # Para mostrar la imagen que se va a procesar... 
+        # Para mostrar la imagen que se va a procesar...
         # imshow(images[0])
         # show()
 
@@ -57,3 +57,16 @@ class Aumentador:
     
     def obtener_datos(self):
         return self.__data
+
+    def __reformatear_imagen(self, source):
+        image = cv2.imread(str(source), cv2.IMREAD_GRAYSCALE)
+        image = cv2.resize(image, (config["ancho_imagenes"], config["alto_imagenes"]))
+        size = image.shape[:2]
+        delta_w = config["ancho_imagenes_a_procesar"] - config["ancho_imagenes"]
+        delta_h = config["alto_imagenes_a_procesar"] - config["alto_imagenes"]
+        top, bottom = delta_h // 2, delta_h - (delta_h // 2)
+        left, right = delta_w // 2, delta_w - (delta_w // 2)
+        color = [255, 255, 255]
+        image = cv2.copyMakeBorder(image, top, bottom, left, right, cv2.BORDER_CONSTANT, value=color)
+
+        return image

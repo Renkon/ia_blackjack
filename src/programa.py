@@ -1,13 +1,20 @@
 #!/usr/bin/python3
 
-from config import config
-from ai.reconocedor import Reconocedor
-from ai.aumentador import Aumentador
+from src.config import config
+from src.ai.reconocedor import Reconocedor
+from src.ai.aumentador import Aumentador
 
 aumentador = Aumentador()
 reconocedor = Reconocedor(aumentador)
 
 datos = reconocedor.iniciar_aumentacion()
-datasets = reconocedor.crear_sets(datos, config["limitador"])
+x_e, y_e, x_p, y_p = reconocedor.crear_sets(datos, config["limitador"])
 
-wait = input("End")
+reconocedor.procesar_sets(
+    x_e,
+    y_e,
+    x_p,
+    y_p,
+    config["ancho_imagenes_a_procesar"] * config["alto_imagenes_a_procesar"],
+    52,
+    config["epochs"])
