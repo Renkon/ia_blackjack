@@ -6,6 +6,6 @@ config = {
     "alto_imagenes": 64,
     "ancho_imagenes_a_procesar": 128,
     "alto_imagenes_a_procesar": 128,
-    "epochs": 200,
+    "epochs": 3,
     "tasa_aprendizaje": 0.001,
 }
