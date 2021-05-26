@@ -42,8 +42,8 @@ class Aumentador:
         )
 
         path_imagen = str(dest_inicial)
-        self.__procesar_imagen(image_generator, path_imagen, tmp_dir / "train", label, int(config["imagenes_por_carta"] * 1.1))
-        self.__procesar_imagen(image_generator, path_imagen, tmp_dir / "test", label, int(config["imagenes_por_carta"] * 0.1))
+        self.__procesar_imagen(image_generator, tmp_dir / "train", label, int(config["imagenes_por_carta"] * 1.1))
+        self.__procesar_imagen(image_generator, tmp_dir / "test", label, int(config["imagenes_por_carta"] * 0.1))
 
         print("Finalizada validacion de existencia de archivos por data augmentation")
 
@@ -78,15 +78,27 @@ class Aumentador:
 
         shutil.copy(path_imagen, str(path_destino / "orig.png"))
 
-    def __procesar_imagen(self, image_generator, path_imagen, path_destino, label, cantidad):
+    def __procesar_imagen(self, image_generator, path_destino, label, cantidad):
         print("Procesando destino " + str(path_destino) + " para label " + str(label))
 
         if not (os.path.exists(path_destino / str(label)) and len(os.listdir(path_destino / str(label))) == cantidad + 1):
+            for f in os.listdir(path_destino / str(label)):
+                if str(f) != "orig.png":
+                    try:
+                        os.remove(path_destino / str(label) / f)
+                    except:
+                        print("Fallo al borrar " + str(f))
+
             image_data = image_generator.flow_from_directory(
                 str(path_destino),
                 classes=[str(label)],
                 save_to_dir=str(path_destino / str(label)),
-                save_prefix="da_")
+                save_prefix="da_",
+                target_size=(config["ancho_imagenes_a_procesar"], config["alto_imagenes_a_procesar"]))
 
             for i in range(cantidad):
                 image_data.next()
+
+            if len(os.listdir(path_destino / str(label))) != cantidad + 1:
+                # Reprocesamos si no juntamos la cantidad exacta hasta que funcione bn
+                self.__procesar_imagen(image_generator, path_destino, label, cantidad)
