@@ -2,7 +2,6 @@
 import os
 import pathlib
 import numpy as np
-from threading import Thread
 
 from PIL import Image
 from keras.utils import np_utils
@@ -44,7 +43,7 @@ class Reconocedor:
     def procesar_sets(self, x_e, y_e, x_p, y_p, map, inputs, outputs, epochs, learn_rate):
         red = RedNeuronal(x_e, y_e, x_p, y_p, map)
         modelo = red.crear_modelo(inputs, outputs, learn_rate)
-        red.entrenar(modelo, epochs)
+        historico = red.entrenar(modelo, epochs)
 
     def __preparar_imagenes(self, lista_imagenes):
         array_imagenes = np.array(lista_imagenes).astype("float32") / 255

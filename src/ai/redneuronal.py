@@ -48,3 +48,5 @@ class RedNeuronal:
         print("Comenzando entrenamiento...")
         history = model.fit(x_train, y_train, epochs=epochs, validation_data=(x_verify, y_verify))
         print("Entrenamiento finalizado...")
+
+        return history
