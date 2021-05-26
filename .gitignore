@@ -130,3 +130,6 @@ dmypy.json
 
 # Idea
 .idea/
+
+# Archivos temporales asociados a imagenes
+src/imagenes/tmp/

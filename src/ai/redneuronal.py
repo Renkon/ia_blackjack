@@ -2,17 +2,17 @@
 
 import tensorflow as tf
 from keras.utils.vis_utils import plot_model
+from sklearn.model_selection import train_test_split
 from tensorflow.keras.layers import Input, Dense
 from tensorflow.keras import Model
 
 class RedNeuronal:
-    def __init__(self, x_e, y_e, x_p, y_p, x_v, y_v):
+    def __init__(self, x_e, y_e, x_p, y_p, map):
         self.__x_e = x_e
         self.__y_e = y_e
         self.__x_p = x_p
         self.__y_p = y_p
-        self.__x_v = x_v
-        self.__y_v = y_v
+        self.__map = map
 
     def crear_modelo(self, inputs, outputs, learn_rate):
         # Modelo con tres layers ocultos.
@@ -44,6 +44,7 @@ class RedNeuronal:
         return model
 
     def entrenar(self, model, epochs):
+        x_train, x_verify, y_train, y_verify = train_test_split(self.__x_e, self.__y_e, test_size=0.1)
         print("Comenzando entrenamiento...")
-        history = model.fit(self.__x_e, self.__y_e, epochs=epochs, validation_data=(self.__x_p, self.__y_p))
+        history = model.fit(x_train, y_train, epochs=epochs, validation_data=(x_verify, y_verify))
         print("Entrenamiento finalizado...")
