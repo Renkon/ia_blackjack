@@ -23,16 +23,6 @@ class Reconocedor:
 
         # Segunda etapa, shuffleamos
         print("Shuffleando lista de datos")
-        self.__aumentador.barajar_datos()
-
-        # Tercer etapa, obtener los datos
-        print("Finalizando proceso de data augmentation")
-        datos = self.__aumentador.obtener_datos()
-
-        # Pero antes de retornarlo, hacemos un cleanup para que no se nos muera la ram
-        self.__aumentador.limpiar_datos()
-
-        return datos
 
     def crear_sets(self, datos, cantidad):
         print("Creando sets de datos")
