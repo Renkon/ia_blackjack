@@ -8,16 +8,15 @@ aumentador = Aumentador()
 reconocedor = Reconocedor(aumentador)
 
 datos = reconocedor.iniciar_aumentacion()
-x_e, y_e, x_p, y_p, x_v, y_v = reconocedor.crear_sets(datos, config["imagenes_por_carta"] * 52)
+x_entrenamiento, y_entrenamiento, x_pruebas, y_pruebas, mapa_clases = reconocedor.crear_sets()
 
 reconocedor.procesar_sets(
-    x_e,
-    y_e,
-    x_p,
-    y_p,
-    x_v,
-    y_v,
-    config["ancho_imagenes_a_procesar"] * config["alto_imagenes_a_procesar"],
+    x_entrenamiento,
+    y_entrenamiento,
+    x_pruebas,
+    y_pruebas,
+    mapa_clases,
+    config["ancho_imagenes_a_procesar"] * config["alto_imagenes_a_procesar"] * 3,
     52,
     config["epochs"],
     config["tasa_aprendizaje"])

@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 config = {
-    "imagenes_por_carta": 1000,
+    "imagenes_por_carta": 50,
     "ancho_imagenes": 32,
     "alto_imagenes": 64,
     "ancho_imagenes_a_procesar": 128,
