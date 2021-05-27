@@ -53,7 +53,7 @@ pip3 install opencv-python
 pip3 install pydot
 pip3 install graphviz
 pip3 install scikit_learn
-pip3 install tensorflow-gpu
+pip3 install pandas
 
 https://gitlab.com/graphviz/graphviz/-/package_files/9574245/download
 Agregar graphviz al path

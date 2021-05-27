@@ -16,6 +16,7 @@ from src.ai.redneuronal import RedNeuronal
 class Reconocedor:
     def __init__(self, aumentador):
         self.__aumentador = aumentador
+        self.__red = None
 
     def iniciar_aumentacion(self):
         self.__aumentador.preparar_procesamiento(pathlib.Path(__file__).parent.parent / "imagenes")
@@ -33,17 +34,25 @@ class Reconocedor:
         x_entrenamiento = self.__preparar_imagenes(imagenes_entrenamiento)
         x_pruebas = self.__preparar_imagenes(imagenes_pruebas)
 
-        y_entrenamiento, diccionario_mapeo = self.__preparar_clases(clases_entrenamiento)
-        y_pruebas, _ = self.__preparar_clases(clases_pruebas, diccionario_mapeo)
+        y_util_entr, y_entrenamiento, diccionario_mapeo = self.__preparar_clases(clases_entrenamiento)
+        y_util_prue, y_pruebas, _ = self.__preparar_clases(clases_pruebas, diccionario_mapeo)
 
         mapa_clases = [x for x, y in diccionario_mapeo.items()]
 
-        return x_entrenamiento, y_entrenamiento, x_pruebas, y_pruebas, mapa_clases
+        return x_entrenamiento, y_entrenamiento, x_pruebas, y_pruebas, mapa_clases, y_util_entr, y_util_prue
 
     def procesar_sets(self, x_e, y_e, x_p, y_p, map, inputs, outputs, epochs, learn_rate):
-        red = RedNeuronal(x_e, y_e, x_p, y_p, map)
-        modelo = red.crear_modelo(inputs, outputs, learn_rate)
-        historico = red.entrenar(modelo, epochs)
+        self.__red = RedNeuronal(x_e, y_e, x_p, y_p, map)
+        modelo = self.__red.crear_modelo(inputs, outputs, learn_rate)
+        if os.path.exists(config["archivo_weights"]):
+            modelo.load_weights(config["archivo_weights"])
+        else:
+            self.__red.entrenar(modelo, epochs)
+
+        return modelo
+
+    def probar_modelo(self, x, y, map, model):
+        self.__red.probar_modelo(x, y, map, model)
 
     def __preparar_imagenes(self, lista_imagenes):
         array_imagenes = np.array(lista_imagenes).astype("float32") / 255
@@ -61,7 +70,7 @@ class Reconocedor:
             y.append(diccionario_mapeo[clase])
 
         y_dummy = np_utils.to_categorical(y)
-        return np.array(y_dummy), diccionario_mapeo
+        return np.array(y), np.array(y_dummy), diccionario_mapeo
 
     def __cargar_imagenes(self, path_imagenes):
         clases = []

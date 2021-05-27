@@ -8,4 +8,5 @@ config = {
     "alto_imagenes_a_procesar": 128,
     "epochs": 3,
     "tasa_aprendizaje": 0.001,
+    "archivo_weights": "C:\\Users\\Fernando\\git\\ia_blackjack\\src\\weights.h5"
 }
