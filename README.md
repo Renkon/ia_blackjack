@@ -43,7 +43,6 @@ https://scikit-learn.org/stable/modules/neural_networks_supervised.html
 
 https://www.tutorialspoint.com/tensorflow/tensorflow_multi_layer_perceptron_learning.htm
 
-# Segunda vez xD
 https://www.youtube.com/watch?v=Rgpfk6eYxJA&t=66s
 
 https://towardsdatascience.com/multi-layer-perceptron-using-tensorflow-9f3e218a4809
