@@ -5,8 +5,8 @@ import pandas as pd
 
 from matplotlib import pyplot as plt
 from sklearn.metrics import classification_report, confusion_matrix
-
 from src.config import config
+from IPython.display import display
 from keras.utils.vis_utils import plot_model
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.layers import Input, Dense
@@ -22,9 +22,8 @@ class RedNeuronal:
 
     def crear_modelo(self, inputs, outputs, learn_rate):
         # Modelo con tres layers ocultos.
-        hidden_layer_nodes = [inputs // 4, inputs // 16, inputs // 64]
+        hidden_layer_nodes = [inputs * 2, inputs * 4, inputs * 2]
         print("Se creara una RNA multiperceptrón con backpropagation")
-        print("Estructura: " + str(inputs) + " | " + str(hidden_layer_nodes[0]) + " | " + str(hidden_layer_nodes[1]) + " | " + str(hidden_layer_nodes[2]) + " | " + str(outputs) + " con Softmax")
 
         input_layer = Input(shape=(inputs,), name="input_img")
         previous_layer = input_layer
@@ -34,7 +33,7 @@ class RedNeuronal:
             layer_name = "hidden_" + str(x + 1)
             previous_layer = Dense(hidden_layer_nodes[x], activation="sigmoid", name=layer_name)(previous_layer)
 
-        output_layer = Dense(52, activation="softmax", name="output")(previous_layer)
+        output_layer = Dense(outputs, activation="softmax", name="output")(previous_layer)
 
         decr_gradient = tf.keras.optimizers.Adam(learning_rate=learn_rate)
 
@@ -77,15 +76,16 @@ class RedNeuronal:
 
         print("Reporte de clasificacion:")
         print(classification_report(class_real_array, class_predicted_array))
-        # conf_matrix = confusion_matrix(class_real_array, class_predicted_array, labels=mapa_clases)
-        # confusion_matrix_dataframe = pd.DataFrame(
-        #     conf_matrix,
-        #     index=["r:{:}".format(x) for x in mapa_clases],
-        #     columns=["p:{:}".format(x) for x in mapa_clases],
-        # )
-        # confusion_matrix_dataframe = confusion_matrix_dataframe.sort_index()
-        # cols = list(confusion_matrix_dataframe.columns.values)
-        # cols.sort()
+        conf_matrix = confusion_matrix(class_real_array, class_predicted_array, labels=mapa_clases)
+        confusion_matrix_dataframe = pd.DataFrame(
+            conf_matrix,
+            index=["r:{:}".format(x) for x in mapa_clases],
+            columns=["p:{:}".format(x) for x in mapa_clases],
+        )
+        confusion_matrix_dataframe = confusion_matrix_dataframe.sort_index()
+        cols = list(confusion_matrix_dataframe.columns.values)
+        cols.sort(key=lambda l: int(l.replace("p:", "")))
+        display(confusion_matrix_dataframe[cols])
 
     def __mostrar_datos_entrenamiento(self, history):
         plt.figure(figsize=(15, 8))

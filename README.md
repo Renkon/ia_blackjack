@@ -1,25 +1,36 @@
-# ia_blackjack
-Correr con Python 3, porque sino sos boleta
+# Librerías necesarias para instalar
+pip3 install tensorflow
 
-# Crear venv
-python3 -m venv --system-site-packages .\venv
+pip3 install tensorflow-gpu
 
-# Activar venv
-.\venv\Scripts\activate
+pip3 install matplotlib
 
-# Instalar pip
-pip3 install --upgrade pip
+pip3 install numpy
 
-# Instalar tensorflow
-pip3 install --upgrade tensorflow
+pip3 install SciPy
 
-# Validar instalacion de tensorflow
-python3 -c "import tensorflow as tf;print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
+pip3 install opencv-python
 
-# Desactivar cdo ya termine
-deactivate
+pip3 install pydot
 
-# ORO PURO
+pip3 install graphviz
+
+pip3 install scikit_learn
+
+pip3 install pandas
+
+pip3 install IPython
+
+# Datos asociados a entrenamientos
+Están disponibles en Google Drive los patrones de entrenamiento usados, y también la matriz de confusión asociada de una corrida de las pruebas.
+
+https://drive.google.com/drive/u/0/folders/1X6VmkozK5xuqCSsW8fSD4WYKfiwzS3SH
+
+Carpeta Entrenamiento[n]/Patrones/
+
+Dentro de cada carpeta estarán las carpetas para entrenar y probar. Las de entrenamiento contienen un 10% extra de patrones para validaciones del entrenamiento.
+
+# Páginas interesantes que nos sirvieron para distintas pruebas
 https://zerowithdot.com/mlp-backpropagation/
 
 https://www.cse.unsw.edu.au/~cs9417ml/MLP2/BackPropagation.html
@@ -42,18 +53,3 @@ https://medium.com/swlh/image-classification-for-playing-cards-26d660f3149e
 https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html
 
 https://nbviewer.jupyter.org/github/PGP-MachineLearning/IA-RNA/blob/master/RNA%20MLP%20Imag%20Nros%20Chinos.ipynb
-
-
-# Pasos a seguir posta posta
-pip3 install tensorflow
-pip3 install matplotlib
-pip3 install numpy
-pip3 install SciPy
-pip3 install opencv-python
-pip3 install pydot
-pip3 install graphviz
-pip3 install scikit_learn
-pip3 install pandas
-
-https://gitlab.com/graphviz/graphviz/-/package_files/9574245/download
-Agregar graphviz al path

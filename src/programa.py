@@ -16,7 +16,7 @@ modelo = reconocedor.procesar_sets(
     x_pruebas,
     y_pruebas,
     mapa_clases,
-    config["ancho_imagenes_a_procesar"] * config["alto_imagenes_a_procesar"] * 3,
+    config["ancho_imagenes_a_procesar"] * config["alto_imagenes_a_procesar"] * 1,
     52,
     config["epochs"],
     config["tasa_aprendizaje"])

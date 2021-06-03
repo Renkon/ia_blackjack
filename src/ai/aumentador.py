@@ -31,24 +31,34 @@ class Aumentador:
         self.__preparar_filesystem(dest_inicial, dest_inicial.parent / "test" / str(label))
         print("Filesystem preparado para label " + str(label))
 
+        # image_generator = ImageDataGenerator(
+        #    rotation_range=180,
+        #    width_shift_range=0.2,
+        #    height_shift_range=0.2,
+        #    brightness_range=(0.5, 1.5),
+        #    shear_range=0.5,
+        #    zoom_range=0.8,
+        #    fill_mode="nearest",
+        #)
+
         image_generator = ImageDataGenerator(
-            rotation_range=180,
-            width_shift_range=0.2,
-            height_shift_range=0.2,
-            brightness_range=(0.5, 1.5),
-            shear_range=0.5,
-            zoom_range=0.8,
-            fill_mode="nearest",
-        )
+                           rescale=1. / 255,
+                           rotation_range=90,
+                           shear_range=0.3,
+                           zoom_range=0.3,
+                           horizontal_flip=False,
+                           vertical_flip=False)
 
         path_imagen = str(dest_inicial)
         self.__procesar_imagen(image_generator, tmp_dir / "train", label, int(config["imagenes_por_carta"] * 1.1))
-        self.__procesar_imagen(image_generator, tmp_dir / "test", label, int(config["imagenes_por_carta"] * 0.1))
+        self.__procesar_imagen(image_generator, tmp_dir / "test", label, int(config["imagenes_por_carta"] * 0.25))
+        os.remove(tmp_dir / "train" / str(label) / "orig.png")
+        os.remove(tmp_dir / "test" / str(label) / "orig.png")
 
         print("Finalizada validacion de existencia de archivos por data augmentation")
 
     def __transformar_imagen_inicial(self, source, dest):
-        image = cv2.imread(str(source), cv2.IMREAD_COLOR)
+        image = cv2.imread(str(source), cv2.IMREAD_GRAYSCALE)
         image = cv2.resize(image, (config["ancho_imagenes"], config["alto_imagenes"]))
         delta_w = config["ancho_imagenes_a_procesar"] - config["ancho_imagenes"]
         delta_h = config["alto_imagenes_a_procesar"] - config["alto_imagenes"]
@@ -94,7 +104,8 @@ class Aumentador:
                 classes=[str(label)],
                 save_to_dir=str(path_destino / str(label)),
                 save_prefix="da_",
-                target_size=(config["ancho_imagenes_a_procesar"], config["alto_imagenes_a_procesar"]))
+                target_size=(config["ancho_imagenes_a_procesar"], config["alto_imagenes_a_procesar"]),
+                color_mode="grayscale")
 
             for i in range(cantidad):
                 image_data.next()

@@ -56,7 +56,7 @@ class Reconocedor:
 
     def __preparar_imagenes(self, lista_imagenes):
         array_imagenes = np.array(lista_imagenes).astype("float32") / 255
-        array_imagenes = array_imagenes.reshape((len(array_imagenes), config["ancho_imagenes_a_procesar"] * config["alto_imagenes_a_procesar"] * 3))
+        array_imagenes = array_imagenes.reshape((len(array_imagenes), config["ancho_imagenes_a_procesar"] * config["alto_imagenes_a_procesar"] * 1))
         return np.array(array_imagenes)
 
     def __preparar_clases(self, lista_clases, diccionario_mapeo = None):
@@ -87,7 +87,7 @@ class Reconocedor:
 
             for image_path in images:
                 image = Image.open(path_dir / image_path)
-                image = image.convert("RGB")
+                image = image.convert("L")
                 image_array = np.array(image)
 
                 clases.append(directorio)
