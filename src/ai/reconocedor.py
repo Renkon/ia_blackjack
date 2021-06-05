@@ -41,8 +41,8 @@ class Reconocedor:
 
         return x_entrenamiento, y_entrenamiento, x_pruebas, y_pruebas, mapa_clases, y_util_entr, y_util_prue
 
-    def procesar_sets(self, x_e, y_e, x_p, y_p, map, inputs, outputs, epochs, learn_rate):
-        self.__red = RedNeuronal(x_e, y_e, x_p, y_p, map)
+    def procesar_sets(self, x_e, y_e, x_p, y_p, mapa, inputs, outputs, epochs, learn_rate):
+        self.__red = RedNeuronal(x_e, y_e, x_p, y_p, mapa)
         modelo = self.__red.crear_modelo(inputs, outputs, learn_rate)
         if os.path.exists(config["archivo_weights"]):
             modelo.load_weights(config["archivo_weights"])
@@ -51,15 +51,15 @@ class Reconocedor:
 
         return modelo
 
-    def probar_modelo(self, x, y, map, model):
-        self.__red.probar_modelo(x, y, map, model)
+    def probar_modelo(self, x, y, mapa, model):
+        self.__red.probar_modelo(x, y, mapa, model)
 
     def __preparar_imagenes(self, lista_imagenes):
-        array_imagenes = np.array(lista_imagenes).astype("float32") / 255
+        array_imagenes = np.array(lista_imagenes).astype("float32") / 255.
         array_imagenes = array_imagenes.reshape((len(array_imagenes), config["ancho_imagenes_a_procesar"] * config["alto_imagenes_a_procesar"] * 1))
         return np.array(array_imagenes)
 
-    def __preparar_clases(self, lista_clases, diccionario_mapeo = None):
+    def __preparar_clases(self, lista_clases, diccionario_mapeo=None):
         if diccionario_mapeo is None:
             aux_dict = list(set(lista_clases))
             diccionario_mapeo = dict(zip(aux_dict, range(len(aux_dict))))

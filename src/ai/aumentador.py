@@ -8,7 +8,6 @@ from PIL import Image
 from PIL._imaging import display
 
 from src.config import config
-from random import shuffle
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from matplotlib.pyplot import imshow, subplots, show
 

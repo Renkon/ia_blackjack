@@ -22,7 +22,7 @@ class RedNeuronal:
 
     def crear_modelo(self, inputs, outputs, learn_rate):
         # Modelo con tres layers ocultos.
-        hidden_layer_nodes = [inputs * 2, inputs * 4, inputs * 2]
+        hidden_layer_nodes = [inputs // 4, inputs // 8, inputs // 16, inputs // 32]
         print("Se creara una RNA multiperceptrón con backpropagation")
 
         input_layer = Input(shape=(inputs,), name="input_img")
@@ -43,15 +43,14 @@ class RedNeuronal:
         print("Modelo creado con " + str(len(model.layers)) + " capas")
         model.summary()
 
-        # Por algun motivo, cuando corro con PyCharm, esto no anda, pero desde la terminal si
-        # plot_model(model, show_layer_names=True, show_shapes=True)
+        tf.keras.utils.plot_model(model, show_layer_names=True, show_shapes=True)
 
         return model
 
     def entrenar(self, model, epochs):
         x_train, x_verify, y_train, y_verify = train_test_split(self.__x_e, self.__y_e, test_size=0.1)
         print("Comenzando entrenamiento...")
-        history = model.fit(x_train, y_train, epochs=epochs, validation_data=(x_verify, y_verify))
+        history = model.fit(x_train, y_train, epochs=epochs, validation_data=(x_verify, y_verify,), batch_size=4)
         print("Entrenamiento finalizado...")
         model.save_weights(config["archivo_weights"])
         self.__mostrar_datos_entrenamiento(history)
