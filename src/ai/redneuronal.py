@@ -22,7 +22,7 @@ class RedNeuronal:
 
     def crear_modelo(self, inputs, outputs, learn_rate):
         # Modelo con tres layers ocultos.
-        hidden_layer_nodes = [inputs // 4, inputs // 8, inputs // 16, inputs // 32]
+        hidden_layer_nodes = [inputs // 2, inputs // 4, inputs // 8]
         print("Se creara una RNA multiperceptrón con backpropagation")
 
         input_layer = Input(shape=(inputs,), name="input_img")
