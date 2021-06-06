@@ -1,3 +1,7 @@
+# Para correr
+Nos paramos en el root del repo y:
+python3 -m src.programa
+
 # Librerías necesarias para instalar
 pip3 install tensorflow
 
